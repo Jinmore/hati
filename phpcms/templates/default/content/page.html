@@ -1,0 +1,54 @@
+{template "public","header"}
+<script type="text/javascript"  src="{JS_PATH}default/extra/jquery-1.4.4.min.js"></script>
+<script type="text/javascript"  src="{JS_PATH}default/extra/picbox.js"></script>
+
+<link href="{CSS_PATH}default/css/picbox.css" rel="stylesheet" type="text/css" media="screen"/>
+
+<div class="about">
+    <div class="inner clear">
+      {if $CATEGORYS[$catid][parentid]==2 || $CATEGORYS[$catid][parentid]==3 || $CATEGORYS[$catid][parentid]==4 || $CATEGORYS[$catid][parentid]==5 || $CATEGORYS[$catid][parentid]==1 }
+      <div class="left fl">
+        {php  $parentid=$CATEGORYS[$catid][parentid];}
+          <div class="title">{$CATEGORYS[$parentid][catname]}</div>
+            {pc:content action="category" catid="$parentid" num="25"  order="listorder ASC" return="data"}
+              <ul>
+            {loop $data $r}
+              <li  {if $catid==$r[catid]}class="bg"{/if}><a href="{$r[url]}">{$r[catname]}</a></li>
+            {/loop}
+            </ul>
+            {/pc}
+      </div>
+      {else}
+        <div class="left fl">
+            <div class="title">帽儿山</div>
+            <ul>
+                <li {if $catid==29}class="bg"{/if}><a href="{$CATEGORYS[29][url]}">{$CATEGORYS[29][catname]}</a></li>
+                <li {if $catid==30}class="bg"{/if}><a href="{$CATEGORYS[30][url]}">{$CATEGORYS[30][catname]}</a></li>
+                <li {if $catid==31}class="bg"{/if}><a href="{$CATEGORYS[31][url]}">{$CATEGORYS[31][catname]}</a></li>
+            </ul>
+        </div>
+        {/if}
+        <div class="right fr">
+            <div class="baseTitle clear">
+                <a href="" class="left-1 fl">{$title}</a>
+                <div class="right-1 fr"><span class="fl">您当前的位置：</span><a href="{APP_PATH}">首页 > </a><a href="{$CATEGORYS[$catid][url]}">{$catname}  </a></div>
+            </div>
+            <div class="about2Con">
+              <!-- 判断 -->
+              {if $catid==46 || $catid==21}
+              <p>
+                <a rel="lightbox-demo" href="{$image}" >
+                {$content}
+                </a>
+              </p>
+              {else}
+              {$content}
+              {/if}
+            </div>
+        </div>
+    </div>
+</div>
+{if $catid==46}
+
+{/if}
+{template "public","footer"}

@@ -1,0 +1,26 @@
+{template "public","header"}
+<div class="about">
+    <div class="inner clear">
+      <div class="left fl">
+        {php  $parentid=$CATEGORYS[$catid][parentid];}
+          <div class="title">{$CATEGORYS[$parentid][catname]}</div>
+            {pc:content action="category" catid="$parentid" num="25"  order="listorder ASC" return="data"}
+              <ul>
+            {loop $data $r}
+              <li  {if $catid==$r[catid]}class="bg"{/if}><a href="{$r[url]}">{$r[catname]}</a></li>
+            {/loop}
+            </ul>
+            {/pc}
+      </div>
+        <div class="right fr">
+            <div class="baseTitle clear">
+                <a  class="left-1 fl">{$title}</a>
+                <div class="right-1 fr"><span class="fl">您当前的位置：</span><a href="{APP_PATH}">首页  </a> {catpos($catid)}</div>
+            </div>
+            <div class="about2Con">
+              {$content}
+            </div>
+        </div>
+    </div>
+</div>
+{template "public","footer"}

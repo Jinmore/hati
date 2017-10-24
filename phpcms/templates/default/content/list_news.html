@@ -1,0 +1,41 @@
+{template "public","header"}
+<div class="about">
+    <div class="inner clear">
+      <div class="left fl">
+        {php  $parentid=$CATEGORYS[$catid][parentid];}
+          <div class="title">{$CATEGORYS[$parentid][catname]}</div>
+            {pc:content action="category" catid="$parentid" num="25"  order="listorder ASC" return="data"}
+              <ul>
+            {loop $data $r}
+              <li  {if $catid==$r[catid]}class="bg"{/if}><a href="{$r[url]}">{$r[catname]}</a></li>
+            {/loop}
+            </ul>
+            {/pc}
+      </div>
+        <div class="right fr">
+            <div class="baseTitle clear">
+                <a href="" class="left-1 fl">{$catname}</a>
+                <div class="right-1 fr"><span class="fl">您当前的位置：</span><a href="{APP_PATH}">首页  </a>{catpos($catid)}</div>
+            </div>
+            <ul class="newsUl">
+              {pc:content action="lists" catid="$catid"  order="listorder desc" num="6" return="data" page="$page"}
+                {loop $data $r}
+                <li class="clear">
+                    <a href="{$r[url]}" class="n-left fl"><img src="{$r[thumb]}"></a>
+                    <div class="n-right fr">
+                        <a href="{$r[url]}" class="title">{$r[title]}</a>
+                        <div class="time">发布时间：{date('Y-m-d',$r['inputtime'])}</div>
+                        <div class="text">
+                            {$r[description]}
+                        </div>
+                        <a href="{$r[url]}" class="more">more</a>
+                    </div>
+                </li>
+                {/loop}
+                {/pc}
+            </ul>
+            <div class="pages">{$pages}</div>
+        </div>
+    </div>
+</div>
+{template "public","footer"}

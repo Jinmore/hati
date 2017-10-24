@@ -1,0 +1,55 @@
+<div class="footer">
+    <div class="top">
+        <div class="inner clear">
+          {pc:content action="category" catid="0" num="25"  order="listorder ASC" return="data"}
+            {loop $data $r}
+            <?php switch($r[catid]){
+              case 1:
+              $r[url]=$CATEGORYS[8][url];break;
+              case 2:
+              $r[url]=$CATEGORYS[12][url];break;
+              case 3:
+              $r[url]=$CATEGORYS[16][url];break;
+              case 4:
+              $r[url]=$CATEGORYS[22][url];break;
+              case 5:
+              $r[url]=$CATEGORYS[32][url];break;
+
+            }
+            ?>
+            <dl>
+                <dt>{$r[catname]}</dt>
+                {if $r[child]==1}
+                {pc:content action="category" catid="$r[catid]" order="listorder asc" return="data2"}
+                  {loop $data2 $k}
+                    <dd><a href="{$k[url]}">{$k[catname]}</a></dd>
+                  {/loop}
+                  {/pc}
+                  {/if}
+            </dl>
+            {/loop}
+            {/pc}
+
+            <div class="right fr clear">
+                <div class="left fl">
+                    <img src="{$CATEGORYS[44][image]}">
+                    <p>微信扫一扫</p>
+                </div>
+                <div class="left fl">
+                    <img src="{$CATEGORYS[45][image]}">
+                    <p>关注官方微博</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bot">
+        <div class="inner clear">
+            <p class="fl">Copyright © 2017 哈尔滨体育学院  All Rights Reserved<span>Email:xiaoban@bsu.edu.cn</span></p>
+            <p class="fr">{ICP}</p>
+        </div>
+    </div>
+</div>
+<div class="scroll-top"><img src="{IMG_PATH}/default/arrowTop.png"></div>
+<script src="{JS_PATH}default/index.js"></script>
+</body>
+</html>

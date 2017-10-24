@@ -1,0 +1,111 @@
+{template "public","header"}
+<div class="main">
+    <div class="inner">
+        <div class="active">
+            <div class="top clear">
+                <div class="left fl clear">
+                    <div class="left-1 fl">
+                        <div class="content">
+                            <div class="text">滑雪</div>
+                            <p>优惠活动</p>
+                        </div>
+                    </div>
+                    <div class="pic"></div>
+                    <div class="left-2 fr">
+                        <ul>
+                          {pc:content action="lists" catid="12" order="listorder desc,id desc" num="3" moreinfo="1" cache="3600"}
+                          {loop $data $r}
+                          <li>
+                              <a href="{$r[url]}" class="text1">{$r[title]}</a>
+                              <div class="text2">{str_cut($r[description],75)}</div>
+                          </li>
+                          {/loop}
+                          {/pc}
+                        </ul>
+                        <a href="{$CATEGORYS[12][url]}" class="activeMore">more</a>
+                    </div>
+                </div>
+                <div class="right fr clear">
+                    <div class="right-1 fl"><script language="javascript" src="{APP_PATH}index.php?m=poster&c=index&a=show_poster&id=1"></script></div>
+                    <div class="right-2 fl">
+                        <div class="bg"></div>
+                        <ul>
+                            <li>
+                                <a href="{$CATEGORYS[29][url]}" class="baseA">
+                                    <div class="text1">Price List</div>
+                                    <div class="text2">价格表</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{$CATEGORYS[30][url]}" class="baseA">
+                                    <div class="text1">Accommodation price</div>
+                                    <div class="text2">住宿价格</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{$CATEGORYS[31][url]}" class="baseA">
+                                    <div class="text1">How to get there</div>
+                                    <div class="text2">如何到达</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="bot clear">
+                <div class="left fl clear">
+                    <div class="bot-1 fl">
+                        <a href="" class="baseA">
+                            <div class="text1">Real-time snow</div>
+                            <div class="text2">{$CATEGORYS[8][catname]}</div>
+                        </a>
+                        <ul>
+                          {pc:content action="lists" catid="8"  order="listorder desc" num="5" return="data"}
+                            {loop $data $r}
+                              <li><a href="{$r[url]}">{$r[title]}</a></li>
+                            {/loop}
+                            {/pc}
+                        </ul>
+                        <a href="{$CATEGORYS[8][url]}" class="activeMore">more</a>
+                    </div>
+                    <div class="bot-2 fl"><img src="{$CATEGORYS[8][image]}"></div>
+                </div>
+                <div class="left leftTwo fl clear">
+                    <div class="bot-1 fl">
+                        <a href="" class="baseA">
+                            <div class="text1">Hat Hill News</div>
+                            <div class="text2">{$CATEGORYS[9][catname]}</div>
+                        </a>
+                        <ul>
+                          {pc:content action="lists" catid="9"  order="listorder desc" num="5" return="data"}
+                            {loop $data $r}
+                              <li><a href="{$r[url]}">{$r[title]}</a></li>
+                            {/loop}
+                            {/pc}
+                        </ul>
+                        <a href="{$CATEGORYS[9][url]}" class="activeMore">more</a>
+                    </div>
+                    <div class="bot-2 fl"><img src="{$CATEGORYS[9][image]}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="it">
+        <div class="inner">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                  {pc:link  action="type_list" typeid="0" siteid="1" linktype="1" order="listorder DESC"  return="pic_link"}
+                  {loop $pic_link $v}
+                  <a href="{$v[url]}" class="swiper-slide" target="_blank"><img src="{$v[logo]}"></a>
+                  <a href="{$v[url]}" class="swiper-slide" target="_blank"><img src="{$v[logo]}"></a>
+                  {/loop}
+                  {/pc}
+
+                </div>
+            </div>
+            <div class="swiper-button-prev itBtn1"><img src="{IMG_PATH}/default/it1_20.png"></div>
+            <div class="swiper-button-next itBtn2"><img src="{IMG_PATH}/default/it1_23.png"></div>
+        </div>
+    </div>
+</div>
+{template "public","footer"}

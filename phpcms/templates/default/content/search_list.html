@@ -1,0 +1,34 @@
+{template "public","header"}
+<div class="about">
+    <div class="inner clear">
+      <div class="left fl">
+        {php  $parentid=$CATEGORYS[$catid][parentid];}
+          <div class="title">帽山儿</div>
+              <ul>
+              <li  class="bg"><a href="{$url}">搜索结果</a></li>
+            </ul>
+      </div>
+        <div class="right fr">
+            <div class="baseTitle clear">
+                <a  class="left-1 fl">搜索结果</a>
+                <div class="right-1 fr"><span class="fl">您当前的位置：</span><a href="{APP_PATH}">首页> </a>搜索结果</div>
+            </div>
+            <ul class="aboutUl">
+                {loop $datas $r}
+                <li>
+                    <div class="title clear">
+                        <div class="q fl">Q：</div>
+                        <a href="{$r[url]}" class="q-right fl" target="_blank">{$r[title]}</a>
+                    </div>
+                    <div class="text clear">
+                        <div class="a fl">A：</div>
+                        <div class="a-right fl">{$r[description]}</div>
+                    </div>
+                </li>
+                {/loop}
+            </ul>
+            <div class="pages">{$pages}</div>
+        </div>
+    </div>
+</div>
+{template "public","footer"}

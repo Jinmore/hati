@@ -1,0 +1,36 @@
+{template "public","header"}
+<div class="about">
+    <div class="inner clear">
+        <div class="left fl">
+          {php  $parentid=$CATEGORYS[$catid][parentid];}
+            <div class="title">{$CATEGORYS[$parentid][catname]}</div>
+              {pc:content action="category" catid="$parentid" num="25"  order="listorder ASC" return="data"}
+                <ul>
+              {loop $data $r}
+                <li  {if $catid==$r[catid]}class="bg"{/if}><a href="{$r[url]}">{$r[catname]}</a></li>
+              {/loop}
+              </ul>
+              {/pc}
+        </div>
+        <div class="right fr">
+            <div class="baseTitle clear">
+                <a href="" class="left-1 fl">{$CATEGORYS[$catid][catname]}</a>
+                <div class="right-1 fr"><span class="fl">您当前的位置：</span><a href="{APP_PATH}">首页 ></a><a href="{$CATEGORYS[$catid][url]}">{$CATEGORYS[$catid][catname]}</a></div>
+            </div>
+            <div class="conTitle">
+                <div class="title">{$title}</div>
+                <p>作者：{$username}<span>来源：{if $copyfrom}{$copyfrom}{else}宣传统战部{/if}</span>发布时间：{date('Y-m-d',strtotime($inputtime))}</p>
+            </div>
+            {if $CATEGORYS[$catid][parentid]==41}
+            <div  style="margin-bottom:0px;text-align:center;padding-top:30px;" >
+              <iframe frameborder="0" width="100%" height="498" src="{$video}"  style="margin-bottom:30px; max-width:640px;">
+              </iframe>
+            </div>
+            {/if}
+            <div class="news2Bot">
+              {$content}
+            </div>
+        </div>
+    </div>
+</div>
+{template "public","footer"}

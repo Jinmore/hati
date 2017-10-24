@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="format-detection" content="telephone=no">
+    <link href="{CSS_PATH}default/base.css" rel="stylesheet" type="text/css">
+    <link href="{CSS_PATH}default/swiper.css" rel="stylesheet" type="text/css">
+    <link href="{CSS_PATH}default/index.css" rel="stylesheet" type="text/css">
+    <script src="{JS_PATH}default/jquery.min.js"></script>
+    <script src="{JS_PATH}default/QQ.js"></script>
+    <script src="{JS_PATH}default/swiper.js"></script>
+    <script src="{JS_PATH}default/Validform_v5.3.2.js"></script>
+    <!-- 2017.10.24号 -->
+    <script src="{JS_PATH}default/home.js"></script>
+    <!--相册栏目-->
+    {if $CATEGORYS[$catid][parentid]==36}
+    <link href="{CSS_PATH}default/baguetteBox.min.css" rel="stylesheet" type="text/css">
+    <script src="{JS_PATH}default/baguetteBox.min.js"></script>
+    <script>
+        $(function () {
+            baguetteBox.run('.baguetteBox', {
+                animation: 'fadeIn'
+            });
+        });
+    </script>
+    {elseif $CATEGORYS[$catid][parentid]==41}
+    <link href="{CSS_PATH}default/baguetteBox.min.css" rel="stylesheet" type="text/css">
+    {/if}
+</head>
+<body>
+<div class="header">
+    <div class="top">
+        <div class="inner clear">
+            <ul class="clear fr">
+                <li><a href="JavaScript:;">网站地图</a></li>
+                <li><a href="javascript:;" onclick="javascript:AddFavorite()">收藏本站</a></li>
+                <li><a href="javascript:;" onclick="SetHome(this,'{$url}')">设为首页</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="mid">
+        <div class="inner clear">
+            <a href="{APP_PATH}" class="logo fl"><img src="{IMG_PATH}/default/logo_03.png"></a>
+            <ul class="clear fr">
+                <li>
+                    <a href="{$CATEGORYS[8][url]}"><img src="{IMG_PATH}/default/mid_03.png"></a>
+                    <div class="hide box1">实时雪晴</div>
+                </li>
+                <li>
+                    <a ><img src="{IMG_PATH}/default/mid_06.png"></a>
+                    <div class="hide wei"><img src="{$CATEGORYS[35][image]}"></div>
+                </li>
+                <li>
+                    <a href=""><img src="{IMG_PATH}/default/mid_08.png"></a>
+                    <div class="people hide">
+                        <div class="iphone clear">
+                            <div class="left fl"><img src="{IMG_PATH}/default/icon_03.png"></div>
+                            <div class="right fl">：{TEL}</div>
+                        </div>
+                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin={QQHAO}&amp;site=www.cactussoft.cn&amp;menu=yes" target="_blank" class="iphone clear">
+                            <div class="left fl"><img src="{IMG_PATH}/default/icon_04.png"></div>
+                            <div class="right fl">：QQ {QQHAO}</div>
+                        </a>
+                        <div class="iphone clear">
+                            <div class="left fl"><img src="{IMG_PATH}/default/icon_06.jpg"></div>
+                            <div class="right fl">：新消息第一时间送达</div>
+                        </div>
+                        <form class="peopleBot clear registerform" method="post" action="index.php?m=content&c=index&a=send">
+                            <input type="text" class="input fl" datatype="e" name="email" placeholder="请填写邮箱" nullmsg="请输入您的邮箱！" errormsg="邮箱格式不正确！">
+                            <input type="submit" id="btn" class="fl" value="订阅">
+                        </form>
+                    </div>
+                </li>
+                <li>
+                    <a href="{$CATEGORYS[37][url]}"><img src="{IMG_PATH}/default/mid_10.png"></a>
+                    <div class="hide box2">相册</div>
+                </li>
+                <li>
+                    <a href="{$CATEGORYS[42][url]}"><img src="{IMG_PATH}/default/mid_12.png"></a>
+                    <div class="hide box3">视频</div>
+                </li>
+                <li>
+                    <a ><img src="{IMG_PATH}/default/mid_14.png"></a>
+                    <form class="search clear registerform2 hide" method="get" action="index.php?m=content&c=index&a=search">
+                      <input type="hidden" name="m" value="content">
+                      <input type="hidden" name="c" value="index">
+                      <input type="hidden" name="a" value="search">
+                        <input type="text" datatype="*" name="keyword" class="fl" placeholder="请输入搜索内容" nullmsg="搜索内容不能为空！" >
+
+                        <input type="submit" class="fl" value="提交">
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="bot">
+        <div class="inner">
+            <ul class="clear">
+                <li {if !isset($catid)}class="bg"{/if}><a href="{APP_PATH}">首页</a></li>
+                {pc:content action="category" catid="0" num="25"  order="listorder ASC" return="data"}
+		              {loop $data $r}
+                  <?php switch($r[catid]){
+                    case 1:
+                    $r[url]=$CATEGORYS[8][url];break;
+                    case 2:
+                    $r[url]=$CATEGORYS[12][url];break;
+                    case 3:
+                    $r[url]=$CATEGORYS[16][url];break;
+                    case 4:
+                    $r[url]=$CATEGORYS[22][url];break;
+                    case 5:
+                    $r[url]=$CATEGORYS[32][url];break;
+
+                  }
+                  ?>
+                  <li class="{if $r[catid]==$catid || $top_parentid==$r[catid] || $CATEGORYS[$catid][parentid]==$r[catid]}bg{/if}">
+                      <a href="{$r[url]}">{$r[catname]}</a>
+                      {if $r[child]==1}
+                      {pc:content action="category" catid="$r[catid]" order="listorder asc" return="data2"}
+                      <dl>
+                          {loop $data2 $k}
+                            <dd><a href="{$k[url]}">{$k[catname]}</a></dd>
+                          {/loop}
+                      </dl>
+                      {/pc}
+                      {/if}
+                  </li>
+		              {/loop}
+                  {/pc}
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+{if !isset($catid)&&!isset($_GET['keyword'])}
+<div class="banner">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+          {pc:content action="lists" catid="7"  order="listorder desc" num="6" return="data"}
+            {loop $data $r}
+            <div class="swiper-slide"><img src="{$r[thumb]}"><div class="left"></div><div class="right"></div></div>
+            {/loop}
+            {/pc}
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="arrow">
+            <div class="swiper-button-prev bannerBtn1"><img src="{IMG_PATH}/default/arrow1_03.png"></div>
+            <div class="swiper-button-next bannerBtn2"><img src="{IMG_PATH}/default/arrow1_05.png"></div>
+        </div>
+    </div>
+</div>
+{else}
+<div class="banner2">
+    <div class="inner2"><img src="{IMG_PATH}default/banner2_03.jpg"></div>
+</div>
+{/if}
